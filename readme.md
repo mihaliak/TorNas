@@ -11,6 +11,7 @@ This application is ready to use except some modules e.g. user management, episo
 You can see screenshots of application in [screenshots folder](https://github.com/mihaliak/TorNas/tree/master/screenshots).
 
 ## Requirements
+* ubuntu >= 16.04
 * composer
 * npm / yarn
 * php >= 7.0
@@ -46,14 +47,12 @@ Replace USER_NAME with user name and NEW_USER_PASSWORD with user password.
 
 1. In /var/www run `php artisan tinker` then type following commands:
 2. `\TorNas\Modules\User\User::create(['login' => 'USER_NAME', 'password' => bcrypt('NEW_USER_PASSWORD')]);`
-3. 
 
 ### Removing user
 Replace USER_NAME with user name.
 
 1. In /var/www run `php artisan tinker` then type following commands:
 2. `\TorNas\Modules\User\User::where('login', 'USER_NAME')->delete();`
-3. 
 
 ## Todo
 - [ ] User management
