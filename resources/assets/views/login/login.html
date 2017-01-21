@@ -1,0 +1,39 @@
+<div class="login">
+    <div class="logo">
+        <i class="material-icons">storage</i>
+        <h1>Tor</h1>
+        <h2>Nas</h2>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading"><i class="material-icons">account_circle</i> Login</div>
+        <div class="panel-body">
+            <form ng-submit="vm.authenticate()" class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="login" class="col-sm-3 control-label">Login:</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="login" ng-model="vm.login">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">Password:</label>
+
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="password" ng-model="vm.password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button class="btn btn-primary form-control" type="submit">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="copyright">&copy; 2017 by <a href="https://www.mihaliak.com">Andrej Mihaliak</a></div>
+</div>

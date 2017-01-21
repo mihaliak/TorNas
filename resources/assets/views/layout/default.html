@@ -1,0 +1,9 @@
+<header ng-include="'/views/layout/header.html'"></header>
+
+<div class="wrapper">
+    <aside ng-include="'/views/layout/sidebar.html'" class="sidebar" ng-controller="SidebarController as sidebar"></aside>
+
+    <main class="content">
+        <div ui-view></div>
+    </main>
+</div>

@@ -1,0 +1,63 @@
+<div class="torrentsPage">
+    <div class="heading">
+        <h1><i class="material-icons">cloud</i> Torrents</h1>
+        <small>refresh in {{ vm.time }} seconds</small>
+    </div>
+
+    <div class="remove-all">
+        <button class="btn btn-danger btn-xs" ng-click="vm.removeAll()"><i class="material-icons">remove_circle_outline</i> Remove all torrents</button>
+    </div>
+
+    <div class="items-wrapper">
+        <div class="row item" ng-class="{ 'active': item.show, 'downloading': item.status.is_downloading, 'paused': ! item.status.is_downloading && ! item.status.is_finished, 'done': item.status.is_finished }" ng-repeat="item in vm.items">
+        <div class="bar" style="width:{{ item.stats.percentage }}%"></div>
+
+        <div class="col-md-1 icon">
+            <i class="material-icons">cloud_download</i>
+        </div>
+
+        <div class="col-md-2 stats">
+            <div>{{ item.stats.download }}/s</div>
+            <div>{{ item.stats.percentage }}%</div>
+            <div>{{ item.stats.eta }}</div>
+        </div>
+
+        <div class="col-md-7" ng-click="item.show = !item.show" >
+            <h4>{{ item.name }}</h4>
+
+            <div class="row attribute">
+                <div class="col-sm-2 name">Hash:</div>
+                <div class="col-sm-10">{{ item.hash }}</div>
+            </div>
+
+            <div class="row attribute">
+                <div class="col-sm-2 name">Size:</div>
+                <div class="col-sm-10">{{ item.size }}</div>
+            </div>
+
+            <div class="row attribute">
+                <div class="col-sm-2 name">Peers:</div>
+                <div class="col-sm-10">{{ item.stats.peers }}</div>
+            </div>
+
+            <div class="row attribute">
+                <div class="col-sm-2 name">Files:</div>
+                <div class="col-sm-10">{{ item.files.length }}</div>
+            </div>
+
+            <div class="files" ng-show="item.show">
+                <p ng-repeat="file in item.files">
+                    <i class="material-icons">attach_file</i> {{ file.name }} ({{ file.size }})
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-2 action">
+            <i ng-click="vm.toggle(item)" ng-show="item.status.is_downloading && !item.status.is_finished" class="material-icons text-info" uib-tooltip="Stop" tooltip-trigger="hover">pause_circle_outline</i>
+            <i ng-click="vm.toggle(item)" ng-show="!item.status.is_downloading && !item.status.is_finished" class="material-icons text-info" uib-tooltip="Start" tooltip-trigger="hover">play_circle_outline</i>
+            <i ng-click="vm.remove(item)" class="material-icons text-danger" uib-tooltip="Remove" tooltip-trigger="hover">remove_circle_outline</i>
+        </div>
+    </div>
+    </div>
+
+</div>

@@ -1,0 +1,125 @@
+<div class="dashboardPage">
+    <div class="heading">
+        <h1><i class="material-icons">dashboard</i> Dashboard</h1>
+        <small>refresh in {{ vm.time }} seconds</small>
+    </div>
+
+    <div class="stats">
+        <div class="item gray">
+            <div class="head">
+                <i class="material-icons">folder_open</i>
+                <span>{{ vm.stats.files }}</span>
+            </div>
+
+            <div class="name">Downloaded files</div>
+
+            <div class="bar">
+                <div class="value" style="width:100%"></div>
+            </div>
+        </div>
+
+        <div class="item secondary">
+            <div class="head">
+                <i class="material-icons">cloud_queue</i>
+                <span>{{ vm.stats.transmission.torrents.active }}/{{ vm.stats.transmission.torrents.total }}</span>
+            </div>
+
+            <div class="name">Active torrents</div>
+
+            <div class="bar">
+                <div class="value" style="width:{{ vm.stats.transmission.torrents.percentage.active }}%"></div>
+            </div>
+        </div>
+
+        <div class="item green">
+            <div class="head">
+                <i class="material-icons">cloud_off</i>
+                <span>{{ vm.stats.transmission.torrents.paused }}/{{ vm.stats.transmission.torrents.total }}</span>
+            </div>
+
+            <div class="name">Paused torrents</div>
+
+            <div class="bar">
+                <div class="value" style="width:{{ vm.stats.transmission.torrents.percentage.paused }}%"></div>
+            </div>
+        </div>
+
+        <div class="item yellow">
+            <div class="head">
+                <i class="material-icons">lightbulb_outline</i>
+                <span>{{ vm.stats.cpu }}%</span>
+            </div>
+
+            <div class="name">CPU Usage</div>
+
+            <div class="bar">
+                <div class="value" style="width:{{ vm.stats.cpu }}%"></div>
+            </div>
+        </div>
+
+        <div class="item purple">
+            <div class="head">
+                <i class="material-icons">storage</i>
+                <span>{{ vm.stats.disk.used }}/{{ vm.stats.disk.total }}</span>
+            </div>
+
+            <div class="name">Storage size</div>
+
+            <div class="bar">
+                <div class="value" style="width:{{ vm.stats.disk.percentage }}%"></div>
+            </div>
+        </div>
+
+        <div class="item red">
+            <div class="head">
+                <i class="material-icons">memory</i>
+                <span>{{ vm.stats.memory.used }}/{{ vm.stats.memory.total }}</span>
+            </div>
+
+            <div class="name">RAM Memory</div>
+
+            <div class="bar">
+                <div class="value" style="width:{{ vm.stats.memory.percentage }}%"></div>
+            </div>
+        </div>
+
+        <div class="item pink">
+            <div class="head">
+                <i class="material-icons">file_download</i>
+                <span>{{ vm.stats.transmission.download.value }}</span>
+            </div>
+
+            <div class="name">Download speed</div>
+
+            <div class="bar">
+                <div class="value" style="width:{{ vm.stats.transmission.download.percentage }}%"></div>
+            </div>
+        </div>
+
+        <div class="item orange">
+            <div class="head">
+                <i class="material-icons">file_upload</i>
+                <span>{{ vm.stats.transmission.upload.value }}</span>
+            </div>
+
+            <div class="name">Upload speed</div>
+
+            <div class="bar">
+                <div class="value" style="width:{{ vm.stats.transmission.upload.percentage }}%"></div>
+            </div>
+        </div>
+
+        <div class="item primary">
+            <div class="head">
+                <i class="material-icons">access_time</i>
+                <span>{{ vm.stats.uptime.days }}d {{ vm.stats.uptime.hours }}h {{ vm.stats.uptime.mins }}m</span>
+            </div>
+
+            <div class="name">Uptime</div>
+
+            <div class="bar">
+                <div class="value" style="width:100%"></div>
+            </div>
+        </div>
+    </div>
+</div>

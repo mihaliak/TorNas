@@ -1,0 +1,136 @@
+.torrentsPage
+    .heading
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        small
+            text-transform: uppercase
+            opacity: .3
+
+    .remove-all
+        text-align: right
+        margin-bottom: 2rem
+
+        .btn
+            display: inline-flex
+            justify-content: center
+            align-items: center
+            opacity: .3
+
+            &:hover
+                opacity: .7 !important
+
+    .items-wrapper
+        display: flex
+        flex-wrap: wrap
+
+    .item
+        border: 2px solid $sidebarBackground
+        margin: 0 0 2rem 0
+        color: $gray
+        padding-bottom: 1rem
+        position: relative
+        width: 100%
+
+        .bar
+            position: absolute
+            content: ' '
+            top: -2px
+            left: 0
+            height: 2px
+
+        &.active
+            background: darken($background, 2%) !important
+
+        &.downloading
+            background: darken($background, 1%)
+
+            .bar
+                background: $blue
+
+            .icon i
+                color: $blue
+
+            .stats div:nth-child(1)
+                color: $blue
+
+            h4
+                color: $blue
+
+        &.paused
+            opacity: .5
+
+            .bar
+                background: $red
+
+            .icon i
+                color: $red
+
+            .stats div:nth-child(1)
+                color: $red
+
+            h4
+                color: $red
+
+        &.done
+            opacity: .5
+
+            .bar
+                background: $green
+
+            .icon i
+                color: $green
+
+            .stats div:nth-child(1)
+                color: $green
+
+            h4
+                color: $green
+
+        .icon
+            padding: 4rem 0 0 0
+            text-align: center
+
+            i
+                font-size: 5rem
+
+        .stats
+            padding-top: 2.5rem
+            text-align: center
+
+            div:nth-child(1)
+                font-size: 2rem
+
+            div:nth-child(2)
+                font-size: 2rem
+                opacity: .5
+
+            div:nth-child(3)
+                opacity: .5
+
+        .attribute
+            .name
+                font-weight: bold
+
+        .action
+            text-align: center
+            padding-top: 4rem
+
+            i
+                font-size: 4rem
+
+        .files
+            background: #fff
+            border-radius: 3px
+            margin-top: 2rem
+            padding: 1rem 0 0.01rem 0
+
+            p
+                padding-left: 1rem
+                color: $background
+
+                i
+                    position: relative
+                    top: 3px
+                    font-size: 1.5rem

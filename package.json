@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch"
+  },
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-route": "1.5.8",
+    "angular-sweetalert": "^1.1.2",
+    "angular-ui-bootstrap": "^2.3.1",
+    "angular-ui-router": "0.3.2",
+    "bootstrap-sass": "^3.3.7",
+    "moment": "^2.17.1",
+    "ng-file-upload": "^12.2.13",
+    "ngstorage": "^0.3.11",
+    "satellizer": "^0.15.5",
+    "sweetalert": "^1.1.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-ng-html2js": "^0.2.2",
+    "laravel-elixir": "^6.0.0-14",
+    "laravel-elixir-vue-2": "^0.2.0",
+    "laravel-elixir-webpack-official": "^1.0.2",
+    "lodash": "^4.16.2"
+  }
+}

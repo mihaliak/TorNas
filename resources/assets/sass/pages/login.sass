@@ -1,0 +1,55 @@
+.login
+    display: flex
+    width: 100%
+    min-height: 100vh
+    justify-content: center
+    align-items: center
+    flex-direction: column
+
+    .logo 
+        margin-bottom: 7rem
+        
+        i
+            position: relative
+            top: 5px
+            font-size: 4rem
+
+        h1
+            font-size: 4rem
+
+        h2
+            font-size: 3.5rem
+
+
+    .panel
+        border-color: black
+        width: 100%
+        max-width: 400px
+
+        .panel-heading
+            background: $brand-secondary
+            color: $white
+            border: 0
+            display: flex
+            align-items: center
+
+            i
+                margin-right: 10px
+
+
+        .panel-body
+            background: $sidebarBackground
+            color: $white
+
+            input
+                color: $background
+
+    .copyright
+        opacity: .5
+        font-size: 1.2rem
+
+        &:hover
+            opacity: 1
+
+        a
+            color: $brand-secondary

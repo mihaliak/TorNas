@@ -1,0 +1,156 @@
+<div id="add-torrent">
+    <div class="modal-header">
+        <button class="close" type="button" ng-click="modal.close()">
+            <i class="material-icons">close</i>
+        </button>
+
+        <h3 class="modal-title">Add torrent</h3>
+    </div>
+
+    <div class="modal-body">
+
+        <form ng-submit="modal.store()" class="form-horizontal">
+
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Name:</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="name" placeholder="e.g. Forrest Gump" ng-model="modal.torrent.name" ng-focus="modal.showResults = true" ng-change="modal.triggerAutocomplete()">
+
+                    <div class="results" ng-show="modal.showResults && modal.autocompleteItems.length">
+                        <div class="item" ng-click="modal.autocomplete(item)" ng-repeat="item in modal.autocompleteItems">
+                            <i class="material-icons">{{ item.Type == 'movie' ? 'movie' : 'video_library' }}</i> {{ item.Title }} <span>({{ item.Year }})</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="year" class="col-sm-3 control-label">Year:</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="year" ng-model="modal.torrent.year" placeholder="e.g. 2017">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Category:</label>
+
+                <div class="col-sm-9 labels label-picker">
+                    <span class="label label-primary" ng-class="{ 'active': item.active }" ng-repeat="item in modal.categories" ng-click="modal.setCategory(item)">{{ item.name }}</span>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="modal.showEpisodeName">
+                <label class="col-sm-3 control-label" for="episode">Episode:</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="episode" ng-model="modal.torrent.episode" placeholder="e.g. S01E01">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Genre:</label>
+
+                <div class="col-sm-9 labels label-picker">
+                    <span class="label label-secondary" ng-class="{ 'active': item.active }" ng-repeat="item in modal.genres" ng-click="item.active = !item.active">{{ item.name }}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="rating" class="col-sm-3 control-label">Rating:</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="rating" ng-model="modal.torrent.rating" placeholder="e.g. 5">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="runtime" class="col-sm-3 control-label">Runtime:</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="runtime" ng-model="modal.torrent.runtime" placeholder="e.g. 120">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="poster" class="col-sm-3 control-label">Cover:</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="poster" ng-model="modal.torrent.cover" placeholder="e.g. https://imgur.com/img.jpg">
+
+                    <div class="cover-preview" ng-show="modal.torrent.cover">
+                        <img ng-src="{{ modal.torrent.cover }}" alt="Cover">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="torrent" class="col-sm-3 control-label">Torrent:</label>
+
+                <div class="col-sm-9">
+                    <uib-tabset ng-init="modal.torrentType = 'file'">
+                        <uib-tab index="0" heading="Súbor" ng-click="modal.torrentType = 'file'">
+                            <div class="upload" ngf-drop ngf-select ng-model="modal.torrentFile" id="torrent" name="torrent">
+                                <div class="top">
+                                    <i class="material-icons">cloud_upload</i>
+
+                                    <span ng-hide="modal.torrentFile">Drag &amp; Drop .torrent file</span>
+                                    <span class="underline" ng-hide="modal.torrentFile">or select from folder</span>
+
+                                    <span ng-show="modal.torrentFile">{{ modal.torrentFile.name }}</span>
+                                </div>
+                            </div>
+                        </uib-tab>
+
+                        <uib-tab index="1" heading="Magnet" ng-click="modal.torrentType = 'magnet'">
+                            <input type="text" class="form-control" id="magnet" ng-model="modal.magnet" placeholder="e.g. magnet:?xt=urn:btih:d096ff66557a5ea70306...">
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="! modal.showSubtitlesInputs">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <button type="button" class="form-control btn btn-default" ng-click="modal.showSubtitlesInputs = true">
+                        <i class="material-icons">subtitles</i> Add subtitles
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="modal.showSubtitlesInputs">
+                <label for="torrent" class="col-sm-3 control-label" for="lang">Subtitles language:</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="lang" ng-model="modal.subtitles.lang" placeholder="e.g. EN">
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="modal.showSubtitlesInputs">
+                <label for="torrent" class="col-sm-3 control-label" for="lang">Subtitles:</label>
+
+                <div class="col-sm-9">
+                    <div class="upload" ngf-drop ngf-select ng-model="modal.subtitles.subtitles" id="subtitles" name="subtitles">
+                        <div class="top">
+                            <i class="material-icons">cloud_upload</i>
+
+                            <span ng-hide="modal.subtitles.subtitles">Drag &amp; Drop .srt file</span>
+                            <span class="underline" ng-hide="modal.subtitles.subtitles">or select from folder</span>
+
+                            <span ng-show="modal.subtitles.subtitles">{{ modal.subtitles.subtitles.name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <button type="submit" class="form-control btn btn-primary">
+                        <i class="material-icons">add_circle_outline</i> Add torrent
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

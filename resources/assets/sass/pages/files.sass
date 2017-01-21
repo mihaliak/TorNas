@@ -1,0 +1,176 @@
+.filesPage
+    .items-wrapper
+        display: flex
+        flex-wrap: wrap
+        width: 100%
+
+        .item
+            position: relative
+            width: calc(100% / 5 - 4rem)
+            max-width: 166px
+            min-width: 160px
+            height: 246px
+            margin: 2.5px
+
+            .overlay
+                display: none
+                position: absolute
+                z-index: 3
+                left: 0
+                top: 0
+                width: 100%
+                height: 100%
+                background: rgba(0, 0, 0, .8)
+                flex-direction: column
+                justify-content: center
+                align-items: center
+
+                i
+                    font-size: 5rem
+                    color: $brand-secondary
+
+                h4
+                    font-size: 1.6rem
+                    width: 100%
+                    text-align: center
+                    padding: 1rem
+                    color: $brand-secondary
+
+                .indicator
+                    position: absolute
+                    top: 0
+                    right: 1rem
+                    z-index: 5
+                    line-height: 4rem
+
+                    i
+                        font-size: 2rem
+
+                    &.downloading
+                        color: $green
+
+                    &.paused
+                        color: $red
+
+                    &.done
+                        color: $blue
+
+            &:hover .overlay
+                display: flex
+
+            img
+                position: relative
+                z-index: 2
+                width:  166px
+                height: 246px
+
+#show-details
+    .modal-body
+        .cover
+            text-align: center
+            position: relative
+
+            .overlay
+                display: none
+                position: absolute
+                z-index: 3
+                left: 1.5rem
+                top: 0
+                width: 194.5px
+                height: 300px
+                background: rgba(0, 0, 0, .8)
+                flex-direction: column
+                justify-content: center
+                align-items: center
+
+                i
+                    font-size: 5rem
+                    color: $brand-secondary
+
+                h4
+                    font-size: 1.6rem
+                    width: 100%
+                    text-align: center
+                    padding: 1rem
+                    color: $brand-secondary
+
+            img:hover + .overlay, .overlay:hover
+                display: flex
+
+            img
+                position: relative
+                z-index: 2
+                width: 100%
+                max-width: 200px
+                height: 300px
+                margin-bottom: 2rem
+
+            button
+                width: 100%
+                margin-bottom: 1rem
+
+                &:last-child
+                    margin-bottom: 2rem
+
+                i
+                    position: relative
+                    right: 5px
+                    font-size: 1.5rem !important
+
+        .attribute
+            margin-bottom: 1rem
+
+            i:not(.upload-icon)
+                font-size: 1.5rem
+                position: relative
+                top: 3px
+
+            .name
+                font-weight: bold
+
+        .description
+            padding: 1rem 1rem 0 1.5rem
+
+        .downloading
+            color: $green
+
+        .paused
+            color: $red
+
+        .done
+            color: $blue
+
+        .episodes,
+        .subtitles
+            .heading
+                font-weight: bold
+
+            i
+                font-size: 1.4rem
+
+        .subtitles
+            padding-top: 2rem
+
+        .row .btn
+            display: flex
+            justify-content: center
+            align-items: center
+
+            i
+                font-size: 1.7rem
+                margin-right: .5rem
+
+        .uib-tab
+            color: #aeaeae
+
+            a, a:hover, a:focus, a:active
+                color: #aeaeae
+
+            &.active
+                color: $brand-primary
+
+                a, a:hover, a:focus, a:active
+                    color: $brand-primary
+
+        .tab-pane
+            padding: 2rem 0 0 0

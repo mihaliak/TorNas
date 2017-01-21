@@ -1,0 +1,176 @@
+.filters
+    width: 100%
+
+    li
+        min-width: 15rem
+        margin-bottom: 2rem
+
+        &.relative
+            position: relative
+
+    .dropdown
+        position: absolute
+        background: $white
+        color: $background
+        border-radius: 6px
+        min-width: 200px
+        margin-top: 1rem
+        max-height: 50vh
+        overflow-y: auto
+        display: flex
+        flex-direction: column
+        z-index: 9999
+
+        .item
+            border-bottom: 1px solid rgba(0, 0, 0, .1)
+            padding: 1rem 2rem
+            cursor: pointer
+
+            i
+                position: relative
+                top: 6px
+                margin-right: 1rem
+
+        &.columns
+            flex-direction: row
+            flex-wrap: wrap
+            max-width: 65%
+
+            div
+                border: none
+                width: 20rem
+
+    .input
+        width: 100%
+        background: $filterBackground
+        color: $filterColor
+        border: none
+        border-radius: 10rem
+        padding: .8rem 6rem .8rem 3rem
+        position: relative
+
+        & + label
+            position: absolute
+            top: 0
+            right: 2.5rem
+            font-size: 2rem
+            line-height: 3.6rem
+            padding: 0 0 0 1rem
+            border-left: 1px solid $background
+            color: $filterColor
+            cursor: pointer
+
+        &:hover
+            background: $filterBackgroundHover
+
+        &:focus, &.active
+            background: $filterBackgroundActive
+            color: $filterColorActive
+
+            & + label
+                color: $filterColorActive
+
+    .button
+        width: 100%
+        background: $filterBackground
+        color: $filterColor
+        border: none
+        border-radius: 10rem
+        padding: .8rem 6rem .8rem 3rem
+        position: relative
+
+        &:after
+            position: absolute
+            top: 0
+            right: 1rem
+            font-size: 2rem
+            line-height: 3.6rem
+            border-left: 1px solid $background
+            content: attr(data-icon)
+            font-family: 'Material Icons'
+            -webkit-font-smoothing: antialiased
+            text-rendering: optimizeLegibility
+            -moz-osx-font-smoothing: grayscale
+            -webkit-font-feature-settings: 'liga'
+            font-feature-settings: 'liga'
+            padding: 0 0 0 1rem
+
+        &:hover
+            background: $filterBackgroundHover
+
+        &:active, &.active
+            background: $filterBackgroundActive
+            color: $filterColorActive
+
+    .dateFilter
+        display: flex
+
+        h3
+            flex: 1
+            font-size: 1.5rem
+            line-height: 1rem
+            margin: 2rem 1rem 1rem 2rem
+            color: $gray
+            text-align: center
+
+    .uib-datepicker
+        outline: none
+        margin: 1rem
+        flex: 1
+
+        .uib-daypicker
+            outline: none
+
+        thead
+            .btn-default
+                background-color: $brand-primary
+                border-color: $brand-primary
+                color: $white
+                border-radius: 0
+                margin-bottom: 1rem
+
+                &.active, &:active
+                    box-shadow: none
+
+            th:first-child .btn-default
+                border-top-left-radius: 3px
+                border-bottom-left-radius: 3px
+
+            th:last-child .btn-default
+                border-top-right-radius: 3px
+                border-bottom-right-radius: 3px
+
+        tbody
+            .text-info
+                color: $brand-secondary
+
+            .btn-default
+                background-color: transparent
+                border-color: transparent
+                color: $background
+
+                &.active, &:active
+                    box-shadow: none
+                    background: $brand-primary
+                    color: $white
+
+                    .text-info
+                        color: $white
+                        font-weight: bold
+
+.active-filters
+    list-style: none
+    display: flex
+    margin-bottom: 2rem
+
+    li
+        margin-right: 2rem
+
+        &:first-child
+            margin-left: 1rem
+
+        span
+            color: $brand-secondary
+
+        small
+            opacity: .5

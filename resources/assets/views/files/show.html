@@ -1,0 +1,240 @@
+<div id="show-details">
+    <div class="modal-header">
+        <button class="close" type="button" ng-click="modal.close()">
+            <i class="material-icons">close</i>
+        </button>
+
+        <h3 class="modal-title">{{ modal.item.name }} ({{ modal.item.year }})</h3>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="cover col-md-3">
+                <img ng-src="{{ modal.mode == 'show' ? modal.item.cover : (modal.edit.cover ? modal.edit.cover : modal.item.cover) }}" alt="photo">
+
+                <div class="overlay" ng-click="modal.showYoutube()">
+                    <i class="material-icons">video_library</i>
+                    <h4>YouTube Trailers</h4>
+                </div>
+
+                <button class="btn btn-primary" ng-click="modal.update()" ng-show="modal.mode == 'edit'">
+                    <i class="material-icons">mode_edit</i> Save
+                </button>
+
+                <button class="btn btn-default" ng-click="modal.changeMode()" ng-show="modal.mode == 'edit'">
+                    <i class="material-icons">mode_edit</i> Back
+                </button>
+
+                <button class="btn btn-primary" ng-click="modal.changeMode()" ng-show="modal.mode == 'show'">
+                    <i class="material-icons">mode_edit</i> Edit
+                </button>
+
+                <button class="btn btn-default" ng-click="modal.remove()" ng-show="modal.mode == 'show'">
+                    <i class="material-icons">remove_circle_outline</i> Remove
+                </button>
+            </div>
+
+            <div class="details col-md-9">
+                <uib-tabset>
+                    <uib-tab index="0" heading="Informations">
+                        <div class="row attribute" ng-show="modal.mode == 'edit'">
+                            <div class="col-sm-3 name">Name:</div>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" ng-model="modal.edit.name">
+                            </div>
+                        </div>
+
+                        <div class="row attribute">
+                            <div class="col-sm-3 name">Category:</div>
+                            <div class="col-sm-9" ng-show="modal.mode == 'show'">{{ modal.item.category.name }}</div>
+
+                            <div class="col-sm-9 labels label-picker" ng-show="modal.mode == 'edit'">
+                                <span class="label label-primary" ng-class="{ 'active': item.active }" ng-repeat="item in modal.categories" ng-click="modal.setCategory(item)">{{ item.name }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row attribute">
+                            <div class="col-sm-3 name">Genre:</div>
+                            <div class="col-sm-9 labels" ng-show="modal.mode == 'show'">
+                                <span class="label label-primary" style="margin-right:3px" ng-repeat="genre in modal.item.genres">{{ genre }}</span>
+                            </div>
+
+                            <div class="col-sm-9 labels label-picker" ng-show="modal.mode == 'edit'">
+                                <span class="label label-secondary" ng-class="{ 'active': item.active }" ng-repeat="item in modal.genres" ng-click="item.active = !item.active">{{ item.name }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row attribute">
+                            <div class="col-sm-3 name">Rating:</div>
+                            <div class="col-sm-9" ng-show="modal.mode == 'show'">{{ modal.item.rating }} / 10</div>
+
+                            <div class="col-sm-9" ng-show="modal.mode == 'edit'">
+                                <input type="text" class="form-control" id="rating" ng-model="modal.edit.rating">
+                            </div>
+                        </div>
+
+                        <div class="row attribute">
+                            <div class="col-sm-3 name">Runtime:</div>
+                            <div class="col-sm-9" ng-show="modal.mode == 'show'">{{ modal.item.runtime }} min</div>
+
+                            <div class="col-sm-9" ng-show="modal.mode == 'edit'">
+                                <input type="text" class="form-control" id="runtime" ng-model="modal.edit.runtime">
+                            </div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'edit'">
+                            <div class="col-sm-3 name">Year:</div>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="year" ng-model="modal.edit.year">
+                            </div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'edit'">
+                            <div class="col-sm-3 name">Cover:</div>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="cover" ng-model="modal.edit.cover">
+                                <small class="help-block">* Type only for change</small>
+                            </div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'show'">
+                            <div class="col-sm-3 name">Size:</div>
+                            <div class="col-sm-9">{{ modal.item.size.human }}</div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'show'">
+                            <div class="col-sm-3 name">State:</div>
+                            <div class="col-sm-9 done" ng-show="modal.item.status.is_finished">
+                                <i class="material-icons">check_circle</i> Downloaded
+                            </div>
+
+                            <div class="col-sm-9 paused" ng-show="modal.item.status.is_paused">
+                                <i class="material-icons">cloud_off</i> Paused
+                            </div>
+
+                            <div class="col-sm-9 downloading" ng-show="! modal.item.status.is_finished && ! modal.item.status.is_paused">
+                                <i class="material-icons">cloud_download</i> Downloading
+                            </div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'show' && ! modal.item.series">
+                            <div class="col-sm-3 name">Location:</div>
+                            <div class="col-sm-9">{{ modal.item.file.location }}/{{ modal.item.file.name }}</div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'show'">
+                            <div class="col-sm-3 name">Added:</div>
+                            <div class="col-sm-9"><span uib-tooltip="{{ modal.item.added.full }}" tooltip-trigger="hover">{{ modal.item.added.human }}</span></div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'show'">
+                            <div class="col-sm-3 name">Updated:</div>
+                            <div class="col-sm-9">
+                                <span uib-tooltip="{{ modal.item.series ? (modal.item.updated.value > modal.item.series[0].updated.value ? modal.item.updated.full : modal.item.series[0].updated.full) : modal.item.updated.full }}" tooltip-trigger="hover">{{ modal.item.series ? (modal.item.updated.value > modal.item.series[0].updated.value ? modal.item.updated.human : modal.item.series[0].updated.human) : modal.item.updated.human }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'show'">
+                            <div class="col-sm-3 name">Added by:</div>
+                            <div class="col-sm-9">{{ modal.item.added_by }}</div>
+                        </div>
+                    </uib-tab>
+
+                    <uib-tab index="1" heading="Episodes" ng-show="modal.item.series">
+                        <div class="episodes" ng-show="modal.mode == 'show'">
+                            <div class="row heading">
+                                <div class="col-md-2 text-center">State</div>
+                                <div class="col-md-2">Episode</div>
+                                <div class="col-md-8">Location</div>
+                            </div>
+
+                            <div class="row" ng-repeat="episode in modal.item.series">
+                                <div class="col-md-2 text-center done" ng-show="episode.status.is_finished">
+                                    <i class="material-icons" uib-tooltip="Downloaded" tooltip-trigger="hover">check_circle</i>
+                                </div>
+
+                                <div class="col-md-2 text-center paused" ng-show="episode.status.is_paused">
+                                    <i class="material-icons" uib-tooltip="Paused" tooltip-trigger="hover">cloud_off</i>
+                                </div>
+
+                                <div class="col-md-2 text-center downloading" ng-show="! episode.status.is_finished && ! episode.status.is_paused">
+                                    <i class="material-icons" uib-tooltip="Downloading" tooltip-trigger="hover">cloud_download</i>
+                                </div>
+
+                                <div class="col-md-2">{{ episode.episode }}</div>
+                                <div class="col-md-8"><small>{{ episode.file.location }}/{{ episode.file.name }}</small></div>
+                            </div>
+
+                        </div>
+                    </uib-tab>
+
+                    <uib-tab index="2" heading="Subtitles">
+
+                        <div class="row" ng-show="modal.mode == 'show'">
+                            <div class="col-sm-12">
+                                <button type="button" class="form-control btn btn-default" ng-click="modal.changeMode()">
+                                    <i class="material-icons">subtitles</i> Add subtitles
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'edit'">
+                            <div class="col-sm-3 name">Language:</div>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="lang" ng-model="modal.subtitles.lang" placeholder="e.g. EN">
+                            </div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'edit' && modal.item.series">
+                            <div class="col-sm-3 name">Episode:</div>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="episode" ng-model="modal.subtitles.episode" placeholder="e.g. S01E01">
+                            </div>
+                        </div>
+
+                        <div class="row attribute" ng-show="modal.mode == 'edit'">
+                            <div class="col-sm-3 name">File:</div>
+
+                            <div class="col-sm-9">
+                                <div class="upload" ngf-drop ngf-select ng-model="modal.subtitles.subtitles" id="subtitles" name="subtitles">
+                                    <div class="top">
+                                        <i class="material-icons upload-icon">cloud_upload</i>
+
+                                        <span ng-hide="modal.subtitles.subtitles">Drag &amp; Drop .srt file</span>
+                                        <span class="underline" ng-hide="modal.subtitles.subtitles">or select from folder</span>
+
+                                        <span ng-show="modal.subtitles.subtitles">{{ modal.subtitles.subtitles.name }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="subtitles" ng-show="modal.mode == 'show'">
+
+                            <div class="row heading">
+                                <div class="col-md-3">Language</div>
+                                <div class="col-md-3" ng-show="modal.item.series">Episode</div>
+                                <div class="{{ modal.item.series ? 'col-md-6' : 'col-md-8' }}">Location</div>
+                            </div>
+
+                            <div class="row" ng-repeat="subtitle in modal.item.subtitles">
+                                <div class="col-md-3">{{ subtitle.lang }}</div>
+                                <div class="col-md-3" ng-show="modal.item.series">{{ subtitle.episode }}</div>
+                                <div class="{{ modal.item.series ? 'col-md-6' : 'col-md-8' }}"><small>{{ subtitle.file }}</small></div>
+                            </div>
+                        </div>
+
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+
+    </div>
+
+</div>

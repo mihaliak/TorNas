@@ -1,0 +1,128 @@
+.dashboardPage
+
+    .heading
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        small
+            text-transform: uppercase
+            opacity: .3
+
+    .stats
+        display: flex
+        flex-wrap: wrap
+        margin: -1rem
+
+        .item
+            background: $statsBackground
+            width: calc(100% / 3 - 2rem)
+            height: 150px
+            margin: 1rem
+            border-radius: 3px
+
+            &:hover
+                background: darken($statsBackground, 1%)
+
+            &:last-child
+                margin-right: 0
+
+            &.primary
+                i
+                    color: $brand-primary
+
+                .value
+                    background: $brand-primary
+
+            &.secondary
+                i
+                    color: $brand-secondary
+
+                .value
+                    background: $brand-secondary
+
+            &.green
+                i
+                    color: $green
+
+                .value
+                    background: $green
+
+            &.yellow
+                i
+                    color: $yellow
+
+                .value
+                    background: $yellow
+
+            &.red
+                i
+                    color: $red
+
+                .value
+                    background: $red
+
+            &.orange
+                i
+                    color: $orange
+
+                .value
+                    background: $orange
+
+            &.pink
+                i
+                    color: $pink
+
+                .value
+                    background: $pink
+
+            &.purple
+                i
+                    color: $purple
+
+                .value
+                    background: $purple
+
+            &.gray
+                i
+                    color: $gray
+
+                .value
+                    background: $gray
+
+            .name
+                text-transform: uppercase
+                text-align: center
+                font-weight: 300
+                opacity: .3
+
+            .head
+                display: flex
+                align-items: center
+                height: 80px
+                position: relative
+
+                i
+                    font-size: 6rem
+                    position: absolute
+                    left: 3rem
+                    top: 1rem
+
+                span
+                    font-size: 2rem
+                    font-weight: 300
+                    text-align: right
+                    flex: 1
+                    padding-right: 2rem
+
+            .bar
+                width: 80%
+                margin: 0 auto
+                height: 5px
+                background: rgba(255, 255, 255, .1)
+                margin-top: 2rem
+                border-radius: 5rem
+
+                .value
+                    border-radius: 5rem
+                    height: 5px

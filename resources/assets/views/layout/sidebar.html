@@ -1,0 +1,21 @@
+<div class="title" ng-click="sidebar.toggleNavigation()">Navigation</div>
+
+<ul class="navigation" ng-class="{ 'active': sidebar.showNavigation }">
+    <li ui-sref="app.index" ui-sref-active="active">
+        <i class="material-icons">dashboard</i> Dashboard
+    </li>
+
+    <li ui-sref="app.files" ui-sref-active="active">
+        <i class="material-icons">folder</i> Files
+    </li>
+
+    <li ui-sref="app.torrents" ui-sref-active="active">
+        <i class="material-icons">cloud</i> Torrents
+    </li>
+
+    <li ng-click="sidebar.showModal()" class="primary">
+        <i class="material-icons">add_circle_outline</i> Add torrent
+    </li>
+</ul>
+
+<div class="copyright">&copy; 2017 by <a href="https://www.mihaliak.com">Andrej Mihaliak</a></div>

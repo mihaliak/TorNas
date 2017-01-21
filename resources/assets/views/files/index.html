@@ -1,0 +1,128 @@
+<div class="filesPage">
+    <h1><i class="material-icons">folder</i> Files ({{ vm.items.length }})</h1>
+
+    <ul class="filters row">
+        <li class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+            <button data-icon="keyboard_arrow_down" class="btn button" ng-class="{ 'active': vm.dropDown.category }" ng-click="vm.toggleDropDown('category')">Category</button>
+
+            <div class="dropdown" ng-show="vm.dropDown.category">
+                <div class="item" ng-click="category.checked = !category.checked; vm.setActiveCategoryFilters()" ng-repeat="category in vm.categories" ng-init="category.checked = false">
+                    <i class="material-icons" ng-class="{'text-primary':category.checked}">{{ category.checked ? 'check_box' : 'check_box_outline_blank'}}</i>
+                    {{ category.name }}
+                </div>
+            </div>
+        </li>
+
+        <li class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+            <button data-icon="keyboard_arrow_down" class="btn button" ng-class="{ 'active': vm.dropDown.genres }" ng-click="vm.toggleDropDown('genres')">Genre</button>
+
+            <div class="dropdown columns" ng-show="vm.dropDown.genres">
+                <div class="item" ng-repeat="genre in vm.genres" ng-click="genre.checked = !genre.checked; vm.setActiveGenresFilters()" ng-init="genre.checked = false">
+                    <i class="material-icons" ng-class="{'text-primary':genre.checked}">{{ genre.checked ? 'check_box' : 'check_box_outline_blank'}}</i>
+                    {{ genre.name }}
+                </div>
+            </div>
+        </li>
+
+        <li class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+            <button data-icon="keyboard_arrow_down" class="btn button" ng-class="{ 'active': vm.dropDown.type }" ng-click="vm.toggleDropDown('type')">State</button>
+
+            <div class="dropdown" ng-show="vm.dropDown.type" ng-init="vm.filter.type = false">
+                <div class="item" ng-click="vm.filter.type = false"><i class="material-icons">{{ vm.filter.type == false ? 'check_box' : 'check_box_outline_blank' }}</i> All</div>
+                <div class="item" ng-click="vm.filter.type = 'active'"><i class="material-icons">{{ vm.filter.type == 'active' ? 'check_box' : 'check_box_outline_blank' }}</i> Active</div>
+                <div class="item" ng-click="vm.filter.type = 'paused'"><i class="material-icons">{{ vm.filter.type == 'paused' ? 'check_box' : 'check_box_outline_blank' }}</i> Paused</div>
+                <div class="item" ng-click="vm.filter.type = 'done'"><i class="material-icons">{{ vm.filter.type == 'done' ? 'check_box' : 'check_box_outline_blank' }}</i> Finished</div>
+            </div>
+        </li>
+
+        <li class="relative col-xs-6 col-sm-4 col-md-4 col-lg-3">
+            <input class="btn input" type="text" id="year" ng-focus="vm.hideDropDowns()" placeholder="Year" ng-model="vm.filter.year">
+            <label class="material-icons" for="name">search</label>
+        </li>
+
+        <li class="relative col-xs-6 col-sm-4 col-md-4 col-lg-3">
+            <input class="btn input" type="text" id="name" ng-focus="vm.hideDropDowns()" placeholder="Name" ng-model="vm.filter.name">
+            <label class="material-icons" for="name">search</label>
+        </li>
+
+        <li class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+            <button data-icon="sort" class="btn button" ng-class="{ 'active': vm.dropDown.sort }" ng-click="vm.toggleDropDown('sort')">Sort by</button>
+
+            <div class="dropdown" ng-show="vm.dropDown.sort">
+                <div class="item" ng-click="vm.changeSort('added.timestamp')">
+                    <i class="material-icons">{{ vm.sort.key == 'added.timestamp' ? (vm.sort.desc ? 'arrow_drop_up' : 'arrow_drop_down') : 'arrow_drop_down' }}</i> Date
+                </div>
+                <div class="item" ng-click="vm.changeSort('size.value')">
+                    <i class="material-icons">{{ vm.sort.key == 'size.value' ? (vm.sort.desc ? 'arrow_drop_up' : 'arrow_drop_down') : 'arrow_drop_down' }}</i> Size
+                </div>
+                <div class="item" ng-click="vm.changeSort('name')">
+                    <i class="material-icons">{{ vm.sort.key == 'name' ? (vm.sort.desc ? 'arrow_drop_up' : 'arrow_drop_down') : 'arrow_drop_down' }}</i> Name
+                </div>
+                <div class="item" ng-click="vm.changeSort('rating')">
+                    <i class="material-icons">{{ vm.sort.key == 'rating' ? (vm.sort.desc ? 'arrow_drop_up' : 'arrow_drop_down') : 'arrow_drop_down' }}</i> Rating
+                </div>
+                <div class="item" ng-click="vm.changeSort('year')">
+                    <i class="material-icons">{{ vm.sort.key == 'year' ? (vm.sort.desc ? 'arrow_drop_up' : 'arrow_drop_down') : 'arrow_drop_down' }}</i> Year
+                </div>
+                <div class="item" ng-click="vm.changeSort('runtime')">
+                    <i class="material-icons">{{ vm.sort.key == 'runtime' ? (vm.sort.desc ? 'arrow_drop_up' : 'arrow_drop_down') : 'arrow_drop_down' }}</i> Runtime
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <ul class="active-filters" ng-show="vm.activeCategoryFilters || vm.activeGenresFilters || vm.filter.type || vm.filter.year || vm.filter.name">
+        <li class="text-primary" ng-click="vm.resetFilters()">Remove all filters</li>
+
+        <li>Filtered by:</li>
+
+        <li ng-show="vm.activeCategoryFilters && vm.activeCategoryFilters.length">
+            <span>Category</span>
+            <small>({{ vm.activeCategoryFilters }})</small>
+        </li>
+
+        <li ng-show="vm.activeGenresFilters && vm.activeGenresFilters.length">
+            <span>Genre</span>
+            <small>({{ vm.activeGenresFilters }})</small>
+        </li>
+
+        <li ng-show="vm.filter.type != false">
+            <span>State</span>
+            <small>({{ vm.filter.type == 'active' ? 'Active' : (vm.filter.type == 'paused' ? 'Paused' : 'Finished') }})</small>
+        </li>
+
+        <li ng-show="vm.filter.year">
+            <span>Year</span>
+            <small>({{ vm.filter.year }})</small>
+        </li>
+
+        <li ng-show="vm.filter.name">
+            <span>Name</span>
+            <small>({{ vm.filter.name }})</small>
+        </li>
+    </ul>
+
+    <div class="items-wrapper">
+        <div class="item" ng-repeat="item in vm.items | filter: { name: vm.filter.name, year: vm.filter.year } | filter: vm.filterType | filter: vm.filterByGenre | filter: vm.filterByCategory | orderBy: vm.sort.key:vm.sort.desc" ng-click="vm.show(item.id)">
+            <img ng-src="{{ item.cover }}" alt="photo">
+
+            <div class="overlay">
+                <i class="material-icons">search</i>
+                <h4>{{ item.name }}</h4>
+                <small>({{ item.year }})</small>
+
+                <div class="indicator done" ng-show="item.status.is_finished">
+                    <i class="material-icons">check_circle</i>
+                </div>
+
+                <div class="indicator paused" ng-show="item.status.is_paused">
+                    <i class="material-icons">cloud_off</i>
+                </div>
+
+                <div class="indicator downloading" ng-show="! item.status.is_finished && ! item.status.is_paused">
+                    <i class="material-icons">cloud_download</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

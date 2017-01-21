@@ -1,0 +1,48 @@
+@media (max-width: 60rem)
+    .dashboardPage .item
+        width: calc(50% - 2rem) !important
+
+    .wrapper
+        display: block
+
+        .content
+            padding: 2rem 1rem
+
+        aside
+            width: 100%
+            padding: 2rem 0 0 0
+
+            .copyright
+                display: none
+
+            ul
+                display: none
+
+                &.active
+                    display: block !important
+
+    .filesPage .items-wrapper .item
+        width: 120px !important
+        height: 180px !important
+        min-width: 0 !important
+
+        img
+            width: 120px !important
+            height: 180px !important
+
+        .overlay
+            i
+                font-size: 3rem !important
+
+            .indicator i
+                font-size: 1.5rem !important
+
+    #show-details .overlay
+        width: 200px !important
+        left: 50% !important
+        transform: translateX(-50%) !important
+
+@media (max-width: 45rem)
+    .dashboardPage .item
+        width: 100% !important
+
