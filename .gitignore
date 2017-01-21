@@ -7,4 +7,7 @@ Homestead.json
 Homestead.yaml
 .env
 .DS_Store
-/public
+/public/media
+/public/css
+/public/fonts
+/public/js
